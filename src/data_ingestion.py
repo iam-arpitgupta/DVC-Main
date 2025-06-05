@@ -3,7 +3,7 @@ import os
 from sklearn.model_selection import train_test_split
 import logging
 import yaml
-
+from typing import dict , Any , List 
 
 # Ensure the "logs" directory exists
 log_dir = 'logs'
@@ -33,7 +33,6 @@ file_handler.setFormatter(formatter)
 logger.addHandler(console_handler)
 logger.addHandler(file_handler)
 
-
 def load_params(params_path: str) -> dict:
     """Load parameters from a YAML file."""
     try:
@@ -50,6 +49,7 @@ def load_params(params_path: str) -> dict:
     except Exception as e:
         logger.error('Unexpected error: %s', e)
         raise
+
 
 def load_data(data_url: str) -> pd.DataFrame:
     """Load data from a CSV file."""
@@ -93,6 +93,7 @@ def save_data(train_data: pd.DataFrame, test_data: pd.DataFrame, data_path: str)
 def main():
     try:
         params = load_params(params_path='params.yaml')
+        # returns all the parameters as dict
         test_size = params['data_ingestion']['test_size']
 
         # test_size = 0.2
